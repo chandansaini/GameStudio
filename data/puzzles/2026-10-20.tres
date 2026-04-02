@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "CLASSIC HALLOWEEN COSTUMES"
+words = Array[String](["ANGEL", "CLOWN", "PIRATE", "WITCH"])
+anchor_word = "ANGEL"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "BEE CREATIONS"
+words = Array[String](["COMB", "HIVE", "HONEY", "WAX"])
+anchor_word = "COMB"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "INTERVAL OF TIME"
+words = Array[String](["PERIOD", "SPELL", "STRETCH", "WHILE"])
+anchor_word = "PERIOD"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "ANIMAL HOMOPHONES"
+words = Array[String](["DEAR", "HAIR", "HOARSE", "WAIL"])
+anchor_word = "DEAR"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2026-10-20"
+title = "Puzzle #194"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

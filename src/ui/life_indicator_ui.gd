@@ -61,6 +61,7 @@ func _build_icons() -> void:
 	for i in range(GSM.MAX_LIVES):
 		var lbl := Label.new()
 		lbl.name = "Heart%d" % i
+		lbl.add_theme_font_override("font", Fonts.regular)
 		lbl.add_theme_font_size_override("font_size", UIScale.font(HEART_SIZE))
 		add_child(lbl)
 		_icons.append(lbl)

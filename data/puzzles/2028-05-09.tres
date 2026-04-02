@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "PARTS OF A COLLEGE CAMPUS"
+words = Array[String](["CAFETERIA", "DORM", "LIBRARY", "QUAD"])
+anchor_word = "CAFETERIA"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "EXAGGERATED, AS A PERFORMANCE"
+words = Array[String](["CAMP", "DRAMATIC", "HAMMY", "OVERDONE"])
+anchor_word = "CAMP"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "CLOSE IN ON"
+words = Array[String](["CORNER", "SURROUND", "TRAP", "TREE"])
+anchor_word = "CORNER"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "STARTS OF GREEK LETTERS"
+words = Array[String](["BET", "DELT", "LAMB", "THE"])
+anchor_word = "BET"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2028-05-09"
+title = "Puzzle #761"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

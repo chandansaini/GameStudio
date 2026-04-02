@@ -17,7 +17,6 @@ var _canvas_layer: CanvasLayer = null
 var _rebuild_pending := false
 
 func _ready() -> void:
-	print("[MainMenu] _ready: start")
 	_restore_timer = LifeRestoreTimer.new()
 	add_child(_restore_timer)
 	_restore_timer.lives_restored.connect(_on_lives_restored)
@@ -25,16 +24,13 @@ func _ready() -> void:
 	UIScale.scale_changed.connect(_on_scale_changed)
 	_build_ui()
 	_refresh_state()
-	print("[MainMenu] _ready: end")
 
 # ---------------------------------------------------------------------------
 # UI construction
 # ---------------------------------------------------------------------------
 
 func _build_ui() -> void:
-	print("[MainMenu] _build_ui: start")
 	if _canvas_layer != null:
-		print("[MainMenu] _build_ui: freeing existing canvas layer")
 		_canvas_layer.queue_free()
 
 	_canvas_layer = CanvasLayer.new()
@@ -45,13 +41,18 @@ func _build_ui() -> void:
 	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_canvas_layer.add_child(bg)
 
-	var anchor := Control.new()
-	anchor.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	_canvas_layer.add_child(anchor)
+	var margin := MarginContainer.new()
+	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	margin.add_theme_constant_override("margin_left",   UIScale.px(20))
+	margin.add_theme_constant_override("margin_right",  UIScale.px(20))
+	margin.add_theme_constant_override("margin_top",    0)
+	margin.add_theme_constant_override("margin_bottom", 0)
+	_canvas_layer.add_child(margin)
 
 	var hbox := HBoxContainer.new()
-	hbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	anchor.add_child(hbox)
+	hbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	hbox.size_flags_vertical   = Control.SIZE_EXPAND_FILL
+	margin.add_child(hbox)
 
 	var left_spacer := Control.new()
 	left_spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -72,6 +73,7 @@ func _build_ui() -> void:
 	# Title
 	var title := Label.new()
 	title.text = "LEXICON"
+	title.add_theme_font_override("font", Fonts.bold)
 	title.add_theme_font_size_override("font_size", UIScale.font(64))
 	title.add_theme_color_override("font_color", C_TEXT_PRIMARY)
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -80,6 +82,7 @@ func _build_ui() -> void:
 	# Tagline
 	var tagline := Label.new()
 	tagline.text = "Daily word grouping puzzle"
+	tagline.add_theme_font_override("font", Fonts.regular)
 	tagline.add_theme_font_size_override("font_size", UIScale.font(16))
 	tagline.add_theme_color_override("font_color", C_TEXT_MUTED)
 	tagline.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -103,6 +106,7 @@ func _build_ui() -> void:
 
 		var streak_lbl := Label.new()
 		streak_lbl.text = "%d day streak" % streak
+		streak_lbl.add_theme_font_override("font", Fonts.semibold)
 		streak_lbl.add_theme_font_size_override("font_size", UIScale.font(20))
 		streak_lbl.add_theme_color_override("font_color", C_WARN)
 		streak_row.add_child(streak_lbl)
@@ -119,36 +123,44 @@ func _build_ui() -> void:
 
 	# Play button
 	_play_btn = Button.new()
-	_play_btn.custom_minimum_size = Vector2(UIScale.px(280), UIScale.px(64))
+	_play_btn.custom_minimum_size = Vector2(UIScale.px(280), UIScale.px(88))
+	_play_btn.add_theme_font_override("font", Fonts.semibold)
 	_play_btn.add_theme_font_size_override("font_size", UIScale.font(22))
 	_play_btn.add_theme_color_override("font_color", C_TEXT_PRIMARY)
 	_style_button(_play_btn, C_ACCENT, C_ACCENT.lightened(0.15))
 	_play_btn.pressed.connect(_on_play_pressed)
 	content.add_child(_play_btn)
-	print("[MainMenu] _build_ui: play button created")
+
+	# Unlimited mode button
+	var unlimited_btn := Button.new()
+	unlimited_btn.text = "Unlimited Mode"
+	unlimited_btn.custom_minimum_size = Vector2(UIScale.px(280), UIScale.px(72))
+	unlimited_btn.add_theme_font_override("font", Fonts.semibold)
+	unlimited_btn.add_theme_font_size_override("font_size", UIScale.font(18))
+	unlimited_btn.add_theme_color_override("font_color", C_TEXT_PRIMARY)
+	_style_button(unlimited_btn, Color(0.110, 0.110, 0.160), Color(0.150, 0.150, 0.210))
+	unlimited_btn.pressed.connect(_on_unlimited_pressed)
+	content.add_child(unlimited_btn)
 
 	# Status label
 	_status_label = Label.new()
+	_status_label.add_theme_font_override("font", Fonts.regular)
 	_status_label.add_theme_font_size_override("font_size", UIScale.font(15))
 	_status_label.add_theme_color_override("font_color", C_TEXT_MUTED)
 	_status_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_status_label.visible = false
 	content.add_child(_status_label)
-	print("[MainMenu] _build_ui: end")
 
 # ---------------------------------------------------------------------------
 # Responsive rebuild
 # ---------------------------------------------------------------------------
 
 func _on_scale_changed(_s: float) -> void:
-	print("[MainMenu] _on_scale_changed: scale=%f" % _s)
 	if _rebuild_pending:
-		print("[MainMenu] _on_scale_changed: rebuild already pending, skipping")
 		return
 	_rebuild_pending = true
 	get_tree().create_timer(0.15).timeout.connect(func():
-		print("[MainMenu] _on_scale_changed: debounce fired, rebuilding")
 		_rebuild_pending = false
 		_build_ui()
 		_refresh_state()
@@ -159,38 +171,33 @@ func _on_scale_changed(_s: float) -> void:
 # ---------------------------------------------------------------------------
 
 func _refresh_state() -> void:
-	print("[MainMenu] _refresh_state: start")
 	if _play_btn == null:
-		print("[MainMenu] _refresh_state: _play_btn is null, returning early")
 		return
 
-	print("[MainMenu] _refresh_state: _status_label is null = %s" % str(_status_label == null))
-	print("[MainMenu] _refresh_state: _restore_timer is null = %s" % str(_restore_timer == null))
-
 	if DailyLock.is_today_completed():
-		print("[MainMenu] _refresh_state: today is completed")
 		_play_btn.text = "Completed Today \u2713"
 		_play_btn.disabled = true
 		_status_label.text = "Come back tomorrow for a new puzzle."
 		_status_label.visible = true
-		print("[MainMenu] _refresh_state: end (completed)")
 		return
 
 	if _restore_timer.is_counting_down():
-		print("[MainMenu] _refresh_state: restore timer is counting down")
 		_play_btn.text = "No Lives Left"
 		_play_btn.disabled = true
 		_status_label.text = _format_countdown(_restore_timer.get_seconds_remaining())
 		_status_label.visible = true
-		print("[MainMenu] _refresh_state: end (counting down)")
 		return
 
 	_play_btn.text = "Play Today's Puzzle"
 	_play_btn.disabled = false
 	_status_label.visible = false
-	print("[MainMenu] _refresh_state: end (ready to play)")
 
 func _on_play_pressed() -> void:
+	GSM.game_mode = GSM.GameMode.DAILY
+	SceneManager.go_to("res://src/scenes/game.tscn")
+
+func _on_unlimited_pressed() -> void:
+	GSM.game_mode = GSM.GameMode.UNLIMITED
 	SceneManager.go_to("res://src/scenes/game.tscn")
 
 func _on_lives_restored() -> void:

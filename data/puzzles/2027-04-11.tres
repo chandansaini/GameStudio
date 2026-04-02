@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "PLACES IN NEW YORK CITY"
+words = Array[String](["CHINATOWN", "DUMBO", "MANHATTAN", "WALL STREET"])
+anchor_word = "CHINATOWN"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "RHYMING TITLES"
+words = Array[String](["BE KIND REWIND", "E.T.", "FRIGHT NIGHT", "KILL BILL"])
+anchor_word = "BE KIND REWIND"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "ENDING IN UNITS OF MEASUREMENT"
+words = Array[String](["HEDWIG AND THE ANGRY INCH", "MY LEFT FOOT", "THE GREEN MILE", "THE LONGEST YARD"])
+anchor_word = "HEDWIG AND THE ANGRY INCH"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "STARTING WITH ANIMALS"
+words = Array[String](["BEETLEJUICE", "FOXY BROWN", "DOGMA", "OCTOPUSSY"])
+anchor_word = "BEETLEJUICE"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2027-04-11"
+title = "Puzzle #367"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

@@ -113,8 +113,9 @@ func _make_button(word: String) -> Button:
 	btn.text = word
 	btn.name = word
 	# Width fills the grid column; height scales with viewport
-	btn.custom_minimum_size = Vector2(0, UIScale.px(64))
+	btn.custom_minimum_size = Vector2(0, UIScale.px(80))
 	btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	btn.add_theme_font_override("font", Fonts.semibold)
 	btn.add_theme_font_size_override("font_size", UIScale.font(18))
 	btn.add_theme_color_override("font_color", COLOR_NORMAL_TEXT)
 	btn.pressed.connect(_on_button_pressed.bind(word))

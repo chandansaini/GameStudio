@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "HUSH-HUSH"
+words = Array[String](["MUM", "PRIVATE", "QUIET", "SECRET"])
+anchor_word = "MUM"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "STATE ABBREVIATIONS"
+words = Array[String](["IN", "MA", "OH", "OK"])
+anchor_word = "IN"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "BASEBALL CALLS"
+words = Array[String](["BALL", "FAIR", "FOUL", "OUT"])
+anchor_word = "BALL"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "QUEEN ___"
+words = Array[String](["BED", "BEE", "MARY", "MOTHER"])
+anchor_word = "BED"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2028-05-18"
+title = "Puzzle #770"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

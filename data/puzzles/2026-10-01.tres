@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "MONTHLY BILLS"
+words = Array[String](["CABLE", "ELECTRIC", "GAS", "WATER"])
+anchor_word = "CABLE"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "RELATED TO SOUND/HEARING"
+words = Array[String](["ACOUSTIC", "AUDITORY", "HEARD", "SONIC"])
+anchor_word = "ACOUSTIC"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "CONNECT"
+words = Array[String](["COUPLE", "HITCH", "LINK", "TIE"])
+anchor_word = "COUPLE"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "EXCITE, WITH “UP”"
+words = Array[String](["AMP", "FIRE", "HYPE", "PUMP"])
+anchor_word = "AMP"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2026-10-01"
+title = "Puzzle #175"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

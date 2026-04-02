@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "MEDDLE"
+words = Array[String](["NOSE AROUND", "POKE", "PRY", "SNOOP"])
+anchor_word = "NOSE AROUND"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "WORDS AFTER “NO” TO MEAN “IT’S ALL GOOD”"
+words = Array[String](["BIGGIE", "HARD FEELINGS", "SWEAT", "WORRIES"])
+anchor_word = "BIGGIE"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "SUPER ___"
+words = Array[String](["GLUE", "MARIO WORLD", "PAC", "POWER"])
+anchor_word = "GLUE"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "ENDING WITH FISH"
+words = Array[String](["CAMISOLE", "CAPE COD", "DRUM AND BASS", "WU-TANG"])
+anchor_word = "CAMISOLE"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2028-05-10"
+title = "Puzzle #762"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

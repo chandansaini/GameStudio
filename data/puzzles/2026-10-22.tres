@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "GENTLE"
+words = Array[String](["LIGHT", "MELLOW", "MILD", "SOFT"])
+anchor_word = "LIGHT"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "CUTS OF PORK"
+words = Array[String](["BELLY", "CHOP", "HOCK", "SHOULDER"])
+anchor_word = "BELLY"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "STATUE OF LIBERTY FEATURES"
+words = Array[String](["CROWN", "ROBE", "TABLET", "TORCH"])
+anchor_word = "CROWN"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "THINGS TO BLOW ON FOR WISHES/LUCK"
+words = Array[String](["CANDLE", "DANDELION", "DICE", "EYELASH"])
+anchor_word = "CANDLE"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2026-10-22"
+title = "Puzzle #196"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

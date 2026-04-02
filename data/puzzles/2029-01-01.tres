@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "\"NO THANKS\""
+words = Array[String](["LATER", "NAH", "NEXT TIME", "PASS"])
+anchor_word = "LATER"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "KINDS OF NUMBERS"
+words = Array[String](["EVEN", "IRRATIONAL", "PERFECT", "PRIME"])
+anchor_word = "EVEN"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "KINDS OF WALLS"
+words = Array[String](["BERLIN", "BRICK", "FOURTH", "GREAT"])
+anchor_word = "BERLIN"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "HOMOPHONES OF NON-NUMERIC AMOUNTS"
+words = Array[String](["AWL", "NUN", "PHEW", "SUM"])
+anchor_word = "AWL"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2029-01-01"
+title = "Puzzle #1036"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

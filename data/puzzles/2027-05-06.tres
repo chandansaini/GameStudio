@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "CHANGE STATES OF MATTER"
+words = Array[String](["CONDENSE", "FREEZE", "MELT", "VAPORIZE"])
+anchor_word = "CONDENSE"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "REPLACEMENT"
+words = Array[String](["ALTERNATE", "BACKUP", "COVER", "SUB"])
+anchor_word = "ALTERNATE"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "SLANGY NAMES FOR PROFESSIONS"
+words = Array[String](["COPPER", "HACK", "SHRINK", "SUIT"])
+anchor_word = "COPPER"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "MARIAH CAREY NUMBER ONE HITS"
+words = Array[String](["FANTASY", "HERO", "HONEY", "SOMEDAY"])
+anchor_word = "FANTASY"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2027-05-06"
+title = "Puzzle #392"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

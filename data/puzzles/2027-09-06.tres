@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "FOOD-RELATED JUMBLES"
+words = Array[String](["HASH", "SALAD", "SCRAMBLE", "STEW"])
+anchor_word = "HASH"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "PUBLIC STANDING"
+words = Array[String](["CHARACTER", "IMAGE", "NAME", "REPUTATION"])
+anchor_word = "CHARACTER"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "INFO ON A MUSEUM PLACARD"
+words = Array[String](["ARTIST", "MEDIUM", "TITLE", "YEAR"])
+anchor_word = "ARTIST"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "ANAGRAMS OF FAMOUS PAINTERS"
+words = Array[String](["DIAL", "EGADS", "MONTE", "YOGA"])
+anchor_word = "DIAL"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2027-09-06"
+title = "Puzzle #515"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

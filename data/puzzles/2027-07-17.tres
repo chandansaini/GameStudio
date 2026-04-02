@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "GET EXCITED, WITH \"UP\""
+words = Array[String](["AMP", "FIRE", "HYPE", "PSYCH"])
+anchor_word = "AMP"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "KINDS OF SHOES"
+words = Array[String](["FLAT", "MULE", "PUMP", "SLIDE"])
+anchor_word = "FLAT"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "LEGISLATIVE ROLES"
+words = Array[String](["CHAIR", "LEADER", "SPEAKER", "WHIP"])
+anchor_word = "CHAIR"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "NAME HOMOPHONES"
+words = Array[String](["DUG", "MATTE", "MIC", "PEAT"])
+anchor_word = "DUG"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2027-07-17"
+title = "Puzzle #464"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

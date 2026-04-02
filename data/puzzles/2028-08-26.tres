@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "THINGS THAT ARE RED"
+words = Array[String](["CLOWN NOSE", "FIRE ENGINE", "MARASCHINO CHERRY", "STOP SIGN"])
+anchor_word = "CLOWN NOSE"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "THINGS FILLED WITH AIR"
+words = Array[String](["BALLOON ANIMAL", "BOUNCY CASTLE", "WATER WINGS", "WHOOPEE CUSHION"])
+anchor_word = "BALLOON ANIMAL"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "THINGS WITH A LOT OF PIECES"
+words = Array[String](["JIGSAW PUZZLE", "LEGO SET", "LITE-BRITE", "PICK-UP STICKS"])
+anchor_word = "JIGSAW PUZZLE"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "ENDING WITH ANIMALS"
+words = Array[String](["DARK HORSE", "FUNKY CHICKEN", "JUMBO SHRIMP", "SEA MONKEY"])
+anchor_word = "DARK HORSE"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2028-08-26"
+title = "Puzzle #908"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

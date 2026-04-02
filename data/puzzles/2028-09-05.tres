@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "ATTIRE"
+words = Array[String](["DUDS", "FIT", "GETUP", "THREADS"])
+anchor_word = "DUDS"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "FOAMY THINGS"
+words = Array[String](["BEER", "FIRE EXTINGUISHER", "SEA", "SHAVING CREAM"])
+anchor_word = "BEER"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "THINGS THAT USE FILTERS"
+words = Array[String](["AIR PURIFIER", "CIGARETTE", "COFFEE MAKER", "INSTAGRAM"])
+anchor_word = "AIR PURIFIER"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "___ OFFICE"
+words = Array[String](["BOX", "MICROSOFT", "OVAL", "POST"])
+anchor_word = "BOX"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2028-09-05"
+title = "Puzzle #918"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

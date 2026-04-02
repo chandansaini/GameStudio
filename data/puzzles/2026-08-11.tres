@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "BEANS"
+words = Array[String](["FAVA", "KIDNEY", "LIMA", "PINTO"])
+anchor_word = "FAVA"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "CITIES BEGINNING WITH “L”"
+words = Array[String](["LAGOS", "LIMERICK", "LINCOLN", "LUXOR"])
+anchor_word = "LAGOS"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "POETRY TERMS"
+words = Array[String](["LINE", "METER", "RHYME", "VERSE"])
+anchor_word = "LINE"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "“THE(E) ___” RAPPERS"
+words = Array[String](["CREATOR", "DUDE", "RAPPER", "STALLION"])
+anchor_word = "CREATOR"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2026-08-11"
+title = "Puzzle #124"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

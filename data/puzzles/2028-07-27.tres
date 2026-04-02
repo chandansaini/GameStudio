@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "BOUNDARY"
+words = Array[String](["BORDER", "EDGE", "EXTREMITY", "LIMIT"])
+anchor_word = "BORDER"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "THEY MOVE IN A SPIRAL"
+words = Array[String](["EDDY", "FOOTBALL", "TASMANIAN DEVIL", "TORNADO"])
+anchor_word = "EDDY"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "SONGS FROM MUSICALS"
+words = Array[String](["CABARET", "EDELWEISS", "MAMMA MIA", "MEMORY"])
+anchor_word = "CABARET"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "WHAT \"ED\" MIGHT INDICATE"
+words = Array[String](["EDITOR", "EDUCATION", "EDWARD", "PAST TENSE"])
+anchor_word = "EDITOR"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2028-07-27"
+title = "Puzzle #878"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

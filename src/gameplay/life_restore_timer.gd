@@ -22,7 +22,7 @@ signal lives_restored
 ## seconds_remaining: how many whole seconds are left.
 signal countdown_tick(seconds_remaining: int)
 
-const RESTORE_DELAY_SECONDS := 8 * 3600  # 8 hours
+const RESTORE_DELAY_SECONDS := 2 * 3600  # 2 hours
 
 var _timer: Timer
 var _restore_at: int = 0  # Unix timestamp for restore

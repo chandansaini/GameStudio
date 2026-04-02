@@ -110,6 +110,19 @@ func set_session_anchors(puzzle_id: String, anchors: Array[String]) -> void:
 	_config.set_value("session_anchors", puzzle_id, anchors)
 	_save()
 
+# ---------------------------------------------------------------------------
+# Unlimited Mode Progress
+# ---------------------------------------------------------------------------
+
+## Returns the index of the next unlimited puzzle to play.
+func get_unlimited_index() -> int:
+	return _config.get_value("unlimited", "index", 0)
+
+## Advances to the next unlimited puzzle. Called after a puzzle is solved.
+func advance_unlimited_index() -> void:
+	_config.set_value("unlimited", "index", get_unlimited_index() + 1)
+	_save()
+
 ## Clears the saved anchors for a puzzle so the next load picks fresh ones.
 ## Called after a puzzle failure so "Play Again" gets a new set of hints.
 func clear_session_anchors(puzzle_id: String) -> void:

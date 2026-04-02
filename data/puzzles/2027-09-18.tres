@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "AREA OF EXPERTISE"
+words = Array[String](["CONCENTRATION", "FIELD", "FOCUS", "SPECIALTY"])
+anchor_word = "CONCENTRATION"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "WAYS TO UNLOCK A DEVICE"
+words = Array[String](["FACE", "FINGERPRINT", "PASSWORD", "PIN"])
+anchor_word = "FACE"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "PASTA SHAPES"
+words = Array[String](["EAR", "ELBOW", "RIBBON", "WHEEL"])
+anchor_word = "EAR"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "DOUBLE ___"
+words = Array[String](["AGENT", "DRIBBLE", "JEOPARDY", "STANDARD"])
+anchor_word = "AGENT"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2027-09-18"
+title = "Puzzle #527"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

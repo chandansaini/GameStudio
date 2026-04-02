@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "MEH"
+words = Array[String](["AVERAGE", "FAIR", "OK", "SO-SO"])
+anchor_word = "AVERAGE"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "U.S. STATE ABBREVIATIONS"
+words = Array[String](["HI", "MA", "OR", "PA"])
+anchor_word = "HI"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "KINDS OF BOOTS"
+words = Array[String](["ANKLE", "COWBOY", "GO-GO", "THIGH-HIGH"])
+anchor_word = "ANKLE"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "THINGS THAT GO UP AND DOWN"
+words = Array[String](["ELEVATOR", "SUN", "TIDE", "YO-YO"])
+anchor_word = "ELEVATOR"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2027-06-15"
+title = "Puzzle #432"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "RESTAURANT WORKERS"
+words = Array[String](["BARTENDER", "CHEF", "HOST", "SERVER"])
+anchor_word = "BARTENDER"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "MOTOR VEHICLES"
+words = Array[String](["BUS", "CAR", "MOTORCYCLE", "TRUCK"])
+anchor_word = "BUS"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "MUPPETS"
+words = Array[String](["ANIMAL", "BEAKER", "GONZO", "SCOOTER"])
+anchor_word = "ANIMAL"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "HAND- AND FOOT-RELATED SLANG"
+words = Array[String](["DIGIT", "DOG", "MITT", "PIGGY"])
+anchor_word = "DIGIT"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2026-07-20"
+title = "Puzzle #102"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

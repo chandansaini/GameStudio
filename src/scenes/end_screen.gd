@@ -46,8 +46,9 @@ func show_result(
 		_build_solved(card, lives_remaining, words_placed, share_text)
 	else:
 		_build_failed(card, categories)
-	_build_countdown(card)
-	_start_countdown()
+	if GSM.game_mode == GSM.GameMode.DAILY:
+		_build_countdown(card)
+		_start_countdown()
 	_animate_card_in(card)
 
 # ---------------------------------------------------------------------------
@@ -99,12 +100,14 @@ func _build_solved(card: VBoxContainer, lives_remaining: int, words_placed: int,
 
 	var check_lbl := Label.new()
 	check_lbl.text = "\u2713"
+	check_lbl.add_theme_font_override("font", Fonts.bold)
 	check_lbl.add_theme_font_size_override("font_size", UIScale.font(40))
 	check_lbl.add_theme_color_override("font_color", C_SOLVED)
 	title_row.add_child(check_lbl)
 
 	var solved_lbl := Label.new()
 	solved_lbl.text = "SOLVED"
+	solved_lbl.add_theme_font_override("font", Fonts.bold)
 	solved_lbl.add_theme_font_size_override("font_size", UIScale.font(48))
 	solved_lbl.add_theme_color_override("font_color", C_SOLVED)
 	title_row.add_child(solved_lbl)
@@ -119,6 +122,7 @@ func _build_solved(card: VBoxContainer, lives_remaining: int, words_placed: int,
 
 	var lives_lbl := Label.new()
 	lives_lbl.text = "Lives remaining:"
+	lives_lbl.add_theme_font_override("font", Fonts.regular)
 	lives_lbl.add_theme_font_size_override("font_size", UIScale.font(15))
 	lives_lbl.add_theme_color_override("font_color", C_TEXT_MUTED)
 	lives_row.add_child(lives_lbl)
@@ -127,6 +131,7 @@ func _build_solved(card: VBoxContainer, lives_remaining: int, words_placed: int,
 
 	var words_lbl := Label.new()
 	words_lbl.text = "Words placed:  %d / 12" % words_placed
+	words_lbl.add_theme_font_override("font", Fonts.regular)
 	words_lbl.add_theme_font_size_override("font_size", UIScale.font(15))
 	words_lbl.add_theme_color_override("font_color", C_TEXT_MUTED)
 	stats.add_child(words_lbl)
@@ -136,7 +141,8 @@ func _build_solved(card: VBoxContainer, lives_remaining: int, words_placed: int,
 	if share_text != "":
 		var copy_btn := Button.new()
 		copy_btn.text = "COPY RESULT"
-		copy_btn.custom_minimum_size = Vector2(0, UIScale.px(48))
+		copy_btn.custom_minimum_size = Vector2(0, UIScale.px(72))
+		copy_btn.add_theme_font_override("font", Fonts.semibold)
 		copy_btn.add_theme_font_size_override("font_size", UIScale.font(15))
 		copy_btn.add_theme_color_override("font_color", Color.WHITE)
 		_style_pill_button(copy_btn, C_SOLVED, C_SOLVED.lightened(0.12))
@@ -145,6 +151,17 @@ func _build_solved(card: VBoxContainer, lives_remaining: int, words_placed: int,
 			copy_btn.text = "\u2713  COPIED!"
 		)
 		card.add_child(copy_btn)
+
+	if GSM.game_mode == GSM.GameMode.UNLIMITED:
+		var next_btn := Button.new()
+		next_btn.text = "Next Puzzle"
+		next_btn.custom_minimum_size = Vector2(0, UIScale.px(72))
+		next_btn.add_theme_font_override("font", Fonts.semibold)
+		next_btn.add_theme_font_size_override("font_size", UIScale.font(15))
+		next_btn.add_theme_color_override("font_color", Color.WHITE)
+		_style_pill_button(next_btn, C_SOLVED, C_SOLVED.lightened(0.12))
+		next_btn.pressed.connect(func(): play_again_pressed.emit())
+		card.add_child(next_btn)
 
 	_add_menu_button(card)
 
@@ -155,12 +172,14 @@ func _build_failed(card: VBoxContainer, categories: Array) -> void:
 
 	var x_lbl := Label.new()
 	x_lbl.text = "\u2717"
+	x_lbl.add_theme_font_override("font", Fonts.bold)
 	x_lbl.add_theme_font_size_override("font_size", UIScale.font(40))
 	x_lbl.add_theme_color_override("font_color", C_FAILED)
 	title_row.add_child(x_lbl)
 
 	var failed_lbl := Label.new()
 	failed_lbl.text = "FAILED"
+	failed_lbl.add_theme_font_override("font", Fonts.bold)
 	failed_lbl.add_theme_font_size_override("font_size", UIScale.font(48))
 	failed_lbl.add_theme_color_override("font_color", C_FAILED)
 	title_row.add_child(failed_lbl)
@@ -171,6 +190,7 @@ func _build_failed(card: VBoxContainer, categories: Array) -> void:
 
 	var intro_lbl := Label.new()
 	intro_lbl.text = "The categories were:"
+	intro_lbl.add_theme_font_override("font", Fonts.regular)
 	intro_lbl.add_theme_font_size_override("font_size", UIScale.font(15))
 	intro_lbl.add_theme_color_override("font_color", C_TEXT_MUTED)
 	cat_block.add_child(intro_lbl)
@@ -182,12 +202,14 @@ func _build_failed(card: VBoxContainer, categories: Array) -> void:
 
 		var name_lbl := Label.new()
 		name_lbl.text = cat.get("name", "")
+		name_lbl.add_theme_font_override("font", Fonts.semibold)
 		name_lbl.add_theme_font_size_override("font_size", UIScale.font(15))
 		name_lbl.add_theme_color_override("font_color", C_GOLD)
 		row.add_child(name_lbl)
 
 		var anchor_lbl := Label.new()
 		anchor_lbl.text = "(%s)" % cat.get("anchor", "")
+		anchor_lbl.add_theme_font_override("font", Fonts.regular)
 		anchor_lbl.add_theme_font_size_override("font_size", UIScale.font(12))
 		anchor_lbl.add_theme_color_override("font_color", C_TEXT_DISABLED)
 		row.add_child(anchor_lbl)
@@ -196,7 +218,8 @@ func _build_failed(card: VBoxContainer, categories: Array) -> void:
 
 	var try_btn := Button.new()
 	try_btn.disabled = true
-	try_btn.custom_minimum_size = Vector2(0, UIScale.px(48))
+	try_btn.custom_minimum_size = Vector2(0, UIScale.px(72))
+	try_btn.add_theme_font_override("font", Fonts.semibold)
 	try_btn.add_theme_font_size_override("font_size", UIScale.font(15))
 	try_btn.add_theme_color_override("font_color", C_TEXT_DISABLED)
 	_style_pill_button_disabled(try_btn)
@@ -215,6 +238,7 @@ func _add_life_circles(parent: Node, lives_remaining: int) -> void:
 	for i in range(3):
 		var heart := Label.new()
 		heart.text = "\u2665" if i < lives_remaining else "\u2661"
+		heart.add_theme_font_override("font", Fonts.regular)
 		heart.add_theme_font_size_override("font_size", UIScale.font(22))
 		heart.add_theme_color_override("font_color",
 			Color(0.824, 0.102, 0.110) if i < lives_remaining else Color(0.400, 0.102, 0.110))
@@ -229,7 +253,8 @@ func _add_divider(parent: VBoxContainer) -> void:
 func _add_menu_button(card: VBoxContainer) -> void:
 	var btn := Button.new()
 	btn.text = "Back to Menu"
-	btn.custom_minimum_size = Vector2(0, UIScale.px(48))
+	btn.custom_minimum_size = Vector2(0, UIScale.px(72))
+	btn.add_theme_font_override("font", Fonts.semibold)
 	btn.add_theme_font_size_override("font_size", UIScale.font(15))
 	btn.add_theme_color_override("font_color", C_TEXT_PRIMARY)
 	_style_pill_button_outlined(btn)
@@ -238,6 +263,7 @@ func _add_menu_button(card: VBoxContainer) -> void:
 
 func _build_countdown(card: VBoxContainer) -> void:
 	_countdown_label = Label.new()
+	_countdown_label.add_theme_font_override("font", Fonts.regular)
 	_countdown_label.add_theme_font_size_override("font_size", UIScale.font(11))
 	_countdown_label.add_theme_color_override("font_color", C_TEXT_MUTED)
 	_countdown_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER

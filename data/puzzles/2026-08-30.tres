@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "SOCIAL MEDIA ACTIONS"
+words = Array[String](["FOLLOW", "LIKE", "SHARE", "SUBSCRIBE"])
+anchor_word = "FOLLOW"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "USE A NEEDLE AND THREAD"
+words = Array[String](["DARN", "HEM", "SEAM", "SEW"])
+anchor_word = "DARN"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "SHOWS SET IN HOSPITALS"
+words = Array[String](["ER", "HOUSE", "RATCHED", "SCRUBS"])
+anchor_word = "ER"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "EXPRESSIONS OF HESITATION"
+words = Array[String](["ERM", "UH", "UM", "WELL"])
+anchor_word = "ERM"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2026-08-30"
+title = "Puzzle #143"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

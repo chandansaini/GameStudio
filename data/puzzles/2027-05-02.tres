@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "DEVELOP, AS IDEAS"
+words = Array[String](["BRAINSTORM", "IDEATE", "SPITBALL", "WORKSHOP"])
+anchor_word = "BRAINSTORM"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "TANGIBLE"
+words = Array[String](["CONCRETE", "MATERIAL", "REAL", "SOLID"])
+anchor_word = "CONCRETE"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "KINDS OF CAKE"
+words = Array[String](["BIRTHDAY", "CRUMB", "MARBLE", "POUND"])
+anchor_word = "BIRTHDAY"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "THINGS YOU CAN THROW, IN METAPHORS"
+words = Array[String](["CURVEBALL", "PARTY", "TANTRUM", "WRENCH"])
+anchor_word = "CURVEBALL"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2027-05-02"
+title = "Puzzle #388"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "THINGS TO BOOK FOR A VACATION"
+words = Array[String](["CAR", "FLIGHT", "HOTEL", "TOUR"])
+anchor_word = "CAR"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "METTLE"
+words = Array[String](["FIGHT", "GRIT", "RESOLVE", "SPIRIT"])
+anchor_word = "FIGHT"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "BAD THINGS FOR A WEBSITE TO DO"
+words = Array[String](["FREEZE", "GLITCH", "TIMEOUT", "QUIT"])
+anchor_word = "FREEZE"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "FIGURES IN CLASSIC DISNEY ANIMATED FILMS"
+words = Array[String](["ELEPHANT", "FAWN", "MARIONETTE", "MOUSE"])
+anchor_word = "ELEPHANT"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2028-04-10"
+title = "Puzzle #732"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

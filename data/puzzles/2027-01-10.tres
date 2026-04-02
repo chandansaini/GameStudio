@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "HALLOWEEN PURCHASES"
+words = Array[String](["CANDY", "COSTUME", "DECORATIONS", "PUMPKIN"])
+anchor_word = "CANDY"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "PLANTS WITH SIMILAR FLAVORS"
+words = Array[String](["ANISE", "FENNEL", "LICORICE", "TARRAGON"])
+anchor_word = "ANISE"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "FOOD SLANG FOR HEAD"
+words = Array[String](["BEAN", "MELON", "NOODLE", "NUT"])
+anchor_word = "BEAN"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "GEMSTONE CUTS"
+words = Array[String](["BAGUETTE", "EMERALD", "PRINCESS", "RADIANT"])
+anchor_word = "BAGUETTE"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2027-01-10"
+title = "Puzzle #276"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

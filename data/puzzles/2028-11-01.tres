@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "THINGS THAT ARE RED"
+words = Array[String](["3 BALL", "CARDINAL", "HEART EMOJI", "SOLO CUP"])
+anchor_word = "3 BALL"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "USED IN METAPHORS FOR PRECARIOUS SITUATIONS"
+words = Array[String](["8 BALL", "DEEP END", "LIMB", "THIN ICE"])
+anchor_word = "8 BALL"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "MUSICAL ARTISTS MINUS STARTING NUMBERS"
+words = Array[String](["6 MAFIA", "CHAINZ", "DIRECTION", "NON BLONDES"])
+anchor_word = "6 MAFIA"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "CARDINAL DIRECTIONS WITH FIRST LETTER CHANGED"
+words = Array[String](["COUTH", "FORTH", "LEST", "OAST"])
+anchor_word = "COUTH"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2028-11-01"
+title = "Puzzle #975"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

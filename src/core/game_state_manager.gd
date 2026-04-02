@@ -46,9 +46,14 @@ signal puzzle_loaded(puzzle: PuzzleData)
 
 const MAX_LIVES := 3
 
+enum GameMode { DAILY, UNLIMITED }
+
 # ---------------------------------------------------------------------------
 # State
 # ---------------------------------------------------------------------------
+
+## Current game mode — set by MainMenu before entering the game scene.
+var game_mode: GameMode = GameMode.DAILY
 
 ## The active puzzle resource.
 var active_puzzle: PuzzleData = null

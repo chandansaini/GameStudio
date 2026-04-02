@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "DELIVER, AS A PACKAGE"
+words = Array[String](["MAIL", "POST", "SEND", "SHIP"])
+anchor_word = "MAIL"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "KINDS OF LIP MAKEUP"
+words = Array[String](["BALM", "GLOSS", "LINER", "STAIN"])
+anchor_word = "BALM"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "PREDICAMENT"
+words = Array[String](["CORNER", "FIX", "HOLE", "SPOT"])
+anchor_word = "CORNER"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "MEASURED IN DEGREES"
+words = Array[String](["ANGLE", "CRIME", "EDUCATION", "TEMPERATURE"])
+anchor_word = "ANGLE"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2027-04-16"
+title = "Puzzle #372"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

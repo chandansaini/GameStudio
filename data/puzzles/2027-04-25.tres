@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "ARMY RANKS"
+words = Array[String](["CAPTAIN", "GENERAL", "MAJOR", "PRIVATE"])
+anchor_word = "CAPTAIN"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "PLACE TO PLUG SOMETHING IN"
+words = Array[String](["JACK", "OUTLET", "PORT", "SOCKET"])
+anchor_word = "JACK"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "CONSUMER DESIRE, COLLECTIVELY"
+words = Array[String](["APPETITE", "AUDIENCE", "DEMAND", "MARKET"])
+anchor_word = "APPETITE"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "___ AD"
+words = Array[String](["ATTACK", "PERSONAL", "POP-UP", "WANT"])
+anchor_word = "ATTACK"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2027-04-25"
+title = "Puzzle #381"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

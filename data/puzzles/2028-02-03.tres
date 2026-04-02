@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "SOURCES OF VITAMINS"
+words = Array[String](["CITRUS", "LEAFY GREENS", "SUNSHINE", "SUPPLEMENTS"])
+anchor_word = "CITRUS"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "PLACES USED IN RETAIL SUFFIXES"
+words = Array[String](["CITY", "LAND", "TOWN", "WORLD"])
+anchor_word = "CITY"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "PLACES TO FIND STARS"
+words = Array[String](["AMERICAN FLAG", "GALAXY", "RED CARPET", "UBER RATING"])
+anchor_word = "AMERICAN FLAG"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "WORDS AFTER “GO”"
+words = Array[String](["ALL OUT", "BETWEEN", "KART", "STEADY"])
+anchor_word = "ALL OUT"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2028-02-03"
+title = "Puzzle #665"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

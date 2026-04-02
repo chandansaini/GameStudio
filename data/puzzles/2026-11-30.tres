@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "MAKE SHORTER"
+words = Array[String](["CLIP", "CUT", "PARE", "TRIM"])
+anchor_word = "CLIP"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "MUSCULAR"
+words = Array[String](["BUILT", "JACKED", "RIPPED", "SWOLE"])
+anchor_word = "BUILT"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "ENTHUSIAST"
+words = Array[String](["BUFF", "FAN", "LOVER", "NUT"])
+anchor_word = "BUFF"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "WRINKLY THINGS"
+words = Array[String](["BRAIN", "PRUNE", "PUG", "WALNUT"])
+anchor_word = "BRAIN"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2026-11-30"
+title = "Puzzle #235"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

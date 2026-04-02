@@ -31,7 +31,7 @@ dist/
 *.dll
 *.so
 *.dylib
-*.app
+\*\.app\n\*\.apk\n\*\.idsig\n\*\.aab
 
 # === Engine: Godot ===
 .godot/

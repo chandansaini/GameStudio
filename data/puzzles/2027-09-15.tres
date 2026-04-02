@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "THINGS THAT PREVENT LEAKS"
+words = Array[String](["CAP", "COVER", "PLUG", "SEAL"])
+anchor_word = "CAP"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "KINDS OF HATS"
+words = Array[String](["BERET", "DERBY", "PILLBOX", "SNAPBACK"])
+anchor_word = "BERET"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "COLLEGE FOOTBALL TEAM MEMBERS"
+words = Array[String](["GATOR", "SOONER", "VOLUNTEER", "WOLVERINE"])
+anchor_word = "GATOR"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "GO ___"
+words = Array[String](["BANANAS", "COMMANDO", "FIGURE", "ROGUE"])
+anchor_word = "BANANAS"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2027-09-15"
+title = "Puzzle #524"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

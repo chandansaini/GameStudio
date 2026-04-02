@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "EASTER SUPPLIES"
+words = Array[String](["BASKET", "DYE", "EGGS", "PEEPS"])
+anchor_word = "BASKET"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "FIREPLACE ACCESSORIES"
+words = Array[String](["BELLOWS", "POKER", "SHOVEL", "TONGS"])
+anchor_word = "BELLOWS"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "ELEMENTS OF \"SATURDAY NIGHT FEVER\""
+words = Array[String](["DISCO", "JOHN TRAVOLTA", "PLATFORM SHOES", "POLYESTER SUIT"])
+anchor_word = "DISCO"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "HOMOPHONES OF WAYS TO COOK SOMETHING"
+words = Array[String](["BOYLE", "BRAYS", "SEER", "STU"])
+anchor_word = "BOYLE"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2028-12-11"
+title = "Puzzle #1015"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

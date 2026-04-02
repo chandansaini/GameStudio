@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "METAPHORS FOR POTENTIALLY VOLATILE SITUATIONS"
+words = Array[String](["CAN OF WORMS", "HORNET’S NEST", "MINEFIELD", "PANDORA’S BOX"])
+anchor_word = "CAN OF WORMS"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "BAR EVENTS"
+words = Array[String](["HAPPY HOUR", "KARAOKE", "LIVE MUSIC", "TRIVIA NIGHT"])
+anchor_word = "HAPPY HOUR"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "WORDS AFTER A WELCOME DEPARTURE"
+words = Array[String](["ABOUT TIME", "FINALLY", "GOOD RIDDANCE", "SAYONARA"])
+anchor_word = "ABOUT TIME"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "ENDING WITH SYNONYMS FOR \"SWINDLE\""
+words = Array[String](["AMERICAN HUSTLE", "COMIC CON", "GOLDEN FLEECE", "LUCKY STIFF"])
+anchor_word = "AMERICAN HUSTLE"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2028-08-06"
+title = "Puzzle #888"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

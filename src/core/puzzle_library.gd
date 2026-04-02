@@ -14,6 +14,7 @@ signal library_loaded(puzzle_count: int)
 signal puzzle_load_error(puzzle_id: String, errors: Array)
 
 const PUZZLE_DIR := "res://data/puzzles/"
+const MANIFEST := preload("res://data/puzzle_manifest.gd")
 
 ## Internal index: puzzle_id → PuzzleData
 var _puzzles: Dictionary = {}
@@ -45,6 +46,18 @@ func get_daily_puzzle() -> PuzzleData:
 	push_error("PuzzleLibrary: No puzzles loaded!")
 	return null
 
+## Returns the puzzle at position [index] in sorted ID order (wraps on overflow).
+## Used by unlimited mode to advance sequentially through all puzzles.
+func get_unlimited_puzzle(index: int) -> PuzzleData:
+	var ids := get_all_puzzle_ids()
+	if ids.is_empty():
+		return null
+	return _puzzles[ids[index % ids.size()]]
+
+## Total number of loaded puzzles.
+func get_unlimited_count() -> int:
+	return _puzzles.size()
+
 ## Returns all loaded puzzle IDs, sorted.
 func get_all_puzzle_ids() -> Array[String]:
 	var ids: Array[String] = []
@@ -58,20 +71,8 @@ func get_all_puzzle_ids() -> Array[String]:
 # ---------------------------------------------------------------------------
 
 func _load_all_puzzles() -> void:
-	var dir := DirAccess.open(PUZZLE_DIR)
-	if dir == null:
-		push_error("PuzzleLibrary: Could not open puzzle directory: %s" % PUZZLE_DIR)
-		_is_loaded = true
-		library_loaded.emit(0)
-		return
-
-	dir.list_dir_begin()
-	var file_name := dir.get_next()
-	while file_name != "":
-		if not dir.current_is_dir() and file_name.ends_with(".tres"):
-			_load_puzzle_file(PUZZLE_DIR + file_name)
-		file_name = dir.get_next()
-	dir.list_dir_end()
+	for puzzle_id in MANIFEST.PUZZLE_IDS:
+		_load_puzzle_file(PUZZLE_DIR + puzzle_id + ".tres")
 
 	_is_loaded = true
 	library_loaded.emit(_puzzles.size())

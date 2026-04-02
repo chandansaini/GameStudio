@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="PuzzleData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://src/core/puzzle_data.gd" id="1_puzzledata"]
+[ext_resource type="Script" path="res://src/core/group_data.gd" id="2_groupdata"]
+[ext_resource type="Script" path="res://src/core/reveal_config.gd" id="3_revealconfig"]
+
+[sub_resource type="Resource" id="Resource_defaultcfg"]
+script = ExtResource("3_revealconfig")
+reveal_steps = Array[int]([1, 2, 2])
+reveal_order = "left_to_right"
+stagger_delay = 0.15
+
+[sub_resource type="Resource" id="Resource_group0"]
+script = ExtResource("2_groupdata")
+category_name = "APPROXIMATELY"
+words = Array[String](["ABOUT", "AROUND", "LIKE", "ROUGHLY"])
+anchor_word = "ABOUT"
+
+[sub_resource type="Resource" id="Resource_group1"]
+script = ExtResource("2_groupdata")
+category_name = "TREES"
+words = Array[String](["ELDER", "PALM", "PINE", "SPRUCE"])
+anchor_word = "ELDER"
+
+[sub_resource type="Resource" id="Resource_group2"]
+script = ExtResource("2_groupdata")
+category_name = "SIZABLE, AS AN AMOUNT"
+words = Array[String](["HANDSOME", "HEALTHY", "RESPECTABLE", "TIDY"])
+anchor_word = "HANDSOME"
+
+[sub_resource type="Resource" id="Resource_group3"]
+script = ExtResource("2_groupdata")
+category_name = "U.S. STATE ABBREVIATIONS, PER AP STYLE GUIDE"
+words = Array[String](["ALA", "ARK", "MISS", "ORE"])
+anchor_word = "ALA"
+
+[resource]
+script = ExtResource("1_puzzledata")
+puzzle_id = "2027-10-25"
+title = "Puzzle #564"
+groups = Array[ExtResource("2_groupdata")]([SubResource("Resource_group0"), SubResource("Resource_group1"), SubResource("Resource_group2"), SubResource("Resource_group3")])
+default_reveal_config = SubResource("Resource_defaultcfg")

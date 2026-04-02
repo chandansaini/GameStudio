@@ -40,19 +40,14 @@ func _ready() -> void:
 	GSM.puzzle_loaded.connect(_on_puzzle_loaded)
 
 func setup(slot_assignment: SlotAssignment, reveal_system: LetterRevealSystem) -> void:
-	print("[SlotUI] setup: start")
-	print("[SlotUI] setup: slot_assignment is null = %s" % str(slot_assignment == null))
-	print("[SlotUI] setup: reveal_system is null = %s" % str(reveal_system == null))
 	_slot_assignment = slot_assignment
 	_reveal_system = reveal_system
 	_slot_assignment.placement_correct.connect(_on_placement_correct)
 	_slot_assignment.placement_wrong.connect(_on_placement_wrong)
 	_slot_assignment.slot_solved.connect(_on_slot_solved)
 	_reveal_system.letters_revealed.connect(_on_letters_revealed)
-	print("[SlotUI] setup: end")
 
 func rebuild() -> void:
-	print("[SlotUI] rebuild: start")
 	for child in get_children():
 		child.queue_free()
 	_panels.clear()
@@ -60,20 +55,14 @@ func rebuild() -> void:
 	_char_panel_maps.clear()
 	_placed_word_boxes.clear()
 
-	print("[SlotUI] rebuild: GSM.active_puzzle is null = %s" % str(GSM.active_puzzle == null))
 	if GSM.active_puzzle == null:
-		print("[SlotUI] rebuild: no active puzzle, returning early")
 		return
 
-	print("[SlotUI] rebuild: building %d slot panels" % GSM.active_puzzle.groups.size())
 	for i in range(4):
-		print("[SlotUI] rebuild: building slot panel %d" % i)
 		var group: GroupData = GSM.active_puzzle.groups[i]
 		_build_slot_panel(i, group)
 
-	print("[SlotUI] rebuild: calling _restore_state")
 	_restore_state()
-	print("[SlotUI] rebuild: end")
 
 # ---------------------------------------------------------------------------
 # Signal handlers
@@ -105,7 +94,7 @@ func _on_letters_revealed(slot_index: int, revealed_indices: Array[int], _is_ful
 
 func _build_slot_panel(slot_index: int, group: GroupData) -> void:
 	var panel := PanelContainer.new()
-	panel.custom_minimum_size = Vector2(0, UIScale.px(120))
+	panel.custom_minimum_size = Vector2(0, UIScale.px(96))
 	panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	panel.name = "Slot%d" % slot_index
 	_apply_panel_style(panel, COLOR_ACTIVE)
@@ -117,17 +106,30 @@ func _build_slot_panel(slot_index: int, group: GroupData) -> void:
 	# Anchor word — left-aligned, gold (uses session anchor, not fixed puzzle data)
 	var anchor_lbl := Label.new()
 	anchor_lbl.text = GSM.session_anchors[slot_index] if slot_index < GSM.session_anchors.size() else group.anchor_word
+	anchor_lbl.add_theme_font_override("font", Fonts.semibold)
 	anchor_lbl.add_theme_font_size_override("font_size", UIScale.font(22))
 	anchor_lbl.add_theme_color_override("font_color", COLOR_ANCHOR)
 	anchor_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	vbox.add_child(anchor_lbl)
 
-	# Category name character cells
+	# Category name character cells.
+	# Wrapped in a plain Control so its minimum width doesn't propagate upward
+	# and force the content column wider than the viewport allows.
+	var char_wrapper := Control.new()
+	char_wrapper.custom_minimum_size = Vector2(0, UIScale.px(36))
+	char_wrapper.clip_contents = true
+	char_wrapper.size_flags_horizontal = Control.SIZE_FILL
+	vbox.add_child(char_wrapper)
+
 	var char_row := HBoxContainer.new()
 	char_row.alignment = BoxContainer.ALIGNMENT_BEGIN
 	char_row.add_theme_constant_override("separation", UIScale.px(4))
-	vbox.add_child(char_row)
+	char_row.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	char_wrapper.add_child(char_row)
 
+	# Calculate cell width that fits all characters within the panel width.
+	# Panel internal width = content_width - 24px (12px content_margin each side).
+	var cell_w := _calc_cell_width(group.category_name)
 	var cell_font_size := UIScale.font(20) if group.category_name.length() > 12 else UIScale.font(26)
 
 	var label_map: Dictionary = {}
@@ -140,11 +142,12 @@ func _build_slot_panel(slot_index: int, group: GroupData) -> void:
 			char_row.add_child(spacer)
 		else:
 			var cell := PanelContainer.new()
-			cell.custom_minimum_size = Vector2(UIScale.px(28), UIScale.px(36))
+			cell.custom_minimum_size = Vector2(cell_w, UIScale.px(36))
 			_apply_cell_style(cell, false)
 
 			var lbl := Label.new()
 			lbl.text = "_"
+			lbl.add_theme_font_override("font", Fonts.mono_bold)
 			lbl.add_theme_font_size_override("font_size", cell_font_size)
 			lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
@@ -224,6 +227,7 @@ func _add_placed_word(slot_index: int, word: String) -> void:
 		return
 	var lbl := Label.new()
 	lbl.text = word
+	lbl.add_theme_font_override("font", Fonts.regular)
 	lbl.add_theme_font_size_override("font_size", UIScale.font(15))
 	lbl.add_theme_color_override("font_color", COLOR_PLACED_WORD)
 	_placed_word_boxes[slot_index].add_child(lbl)
@@ -295,6 +299,24 @@ func _set_panel_solved_settled(slot_index: int) -> void:
 	style.content_margin_top    = 12
 	style.content_margin_bottom = 12
 	panel.add_theme_stylebox_override("panel", style)
+
+## Returns the cell width (px) that fits all chars of [category_name]
+## within the available panel width, capped at the design-spec max of 28px.
+func _calc_cell_width(category_name: String) -> int:
+	var non_space := 0
+	var spaces := 0
+	for ch in category_name:
+		if ch == " ":
+			spaces += 1
+		else:
+			non_space += 1
+	if non_space == 0:
+		return UIScale.px(28)
+	var avail := UIScale.content_width() - UIScale.pxf(24.0)  # 12px content_margin each side
+	var space_total := UIScale.px(12) * spaces
+	var sep_total := UIScale.px(4) * (non_space + spaces - 1)
+	var cell_w := int((avail - space_total - sep_total) / non_space)
+	return clampi(cell_w, UIScale.px(14), UIScale.px(28))
 
 func _apply_panel_style(panel: PanelContainer, color: Color) -> void:
 	var style := StyleBoxFlat.new()
