@@ -1,3 +1,11 @@
+# === Game Projects (not part of studio setup) ===
+projects/
+prototypes/
+design/
+DungeonDesign.md
+GAME_LOGIC_ANALYSIS.md
+picmerge-level-gen-research.md
+
 # === IDE and Editor ===
 .vs/
 .vscode/settings.json

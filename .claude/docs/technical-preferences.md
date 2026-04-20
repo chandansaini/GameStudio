@@ -21,8 +21,8 @@
 
 ## Performance Budgets
 
-- **Target Framerate**: [TO BE CONFIGURED — typical: 60fps]
-- **Frame Budget**: [TO BE CONFIGURED — typical: 16.6ms]
+- **Target Framerate**: 60fps (mobile primary target)
+- **Frame Budget**: 16.6ms
 - **Draw Calls**: [TO BE CONFIGURED]
 - **Memory Ceiling**: [TO BE CONFIGURED]
 
@@ -34,8 +34,8 @@
 
 ## Forbidden Patterns
 
-<!-- Add patterns that should never appear in this project's codebase -->
-- [None configured yet — add as architectural decisions are made]
+- **No singletons for game state** — use autoloads with explicit interfaces so systems remain independently testable
+- **No hardcoded gameplay values** — all monster stats, class stats, floor tables, and tuning values must live in data resources (not in GDScript literals)
 
 ## Allowed Libraries / Addons
 

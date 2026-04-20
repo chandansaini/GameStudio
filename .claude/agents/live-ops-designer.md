@@ -169,3 +169,7 @@ plain text. Follow the **Explain → Capture** pattern:
 - Work with **community-manager** for player communication and feedback
 - Work with **release-manager** for content deployment pipeline
 - Work with **writer** for event descriptions and seasonal lore
+- Work with **product-manager** (f2p) for event KPI targets, content calendar
+  alignment with business goals, and roadmap prioritization
+- Work with **data-analyst** (f2p) for event performance analysis, retention
+  impact of live-ops content, and post-event retrospectives
