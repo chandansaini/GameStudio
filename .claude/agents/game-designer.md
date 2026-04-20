@@ -210,6 +210,85 @@ Apply the **sink/faucet model** for all virtual economies:
   session should leave one compelling open loop (a goal almost completed, a
   reward almost unlocked)
 
+### F2P Design Patterns (when `studio_mode: f2p`)
+
+#### FTUE and Onboarding
+The First Time User Experience determines D1 retention more than any other
+single design decision. Every F2P game must be designed around the **aha moment**
+— the specific instant a new player understands why this game is worth their time.
+
+- **Identify the aha moment first**: What is the single moment that makes a
+  playtester say "oh, I get it now"? Design the entire first session to reach
+  that moment in under 5 minutes (casual) or 10 minutes (mid-core).
+- **First session emotional arc**: Curiosity → First win → Competence → Investment.
+  Never let a player fail before their first win. Never show the full game before
+  the hook lands.
+- **Progressive disclosure**: Introduce one mechanic at a time. Never explain
+  a system the player hasn't encountered yet. Contextual tutorials only —
+  no upfront tutorial walls.
+- **The golden path**: Map the single optimal route through the first session.
+  Every decision point before the aha moment should be either guided or
+  have an obvious correct answer. Save meaningful choice for after investment.
+- **Review prompt timing**: Never ask for a store review before the aha moment.
+  Optimal timing: immediately after a peak positive moment (first big win,
+  first major unlock, first social connection).
+- **Session length targets**: Casual: 3-8 minutes first session. Mid-core:
+  8-15 minutes. Exceed these and players churn before the hook lands.
+
+#### Live Game Design Thinking
+Design every system to be tunable post-launch without a store update.
+
+- **Remote config first**: Every numeric balance value is a remote config key,
+  not a hardcoded constant. XP requirements, prices, timers, drop rates —
+  all must be changeable server-side within minutes of a decision.
+- **A/B testable by design**: Before building any system, define what you would
+  A/B test about it. Design two variants as first-class citizens. If you can't
+  imagine testing it, you don't understand it well enough to build it.
+- **Feature flags**: Design features so they can be enabled or disabled
+  per-player-segment without a build. New features ship dark, then roll out.
+- **Safe defaults**: When remote config is unavailable, the game must be fully
+  playable with hardcoded defaults. Remote config augments — never gates.
+- **Tuning velocity**: Balance changes should deploy in minutes. If a balance
+  fix requires a store submission, the system was designed wrong.
+
+#### Viral Loop Design
+Every F2P game should have a designed viral coefficient — the number of new
+players each existing player generates.
+
+- **K-factor target**: Aim for K > 0.3 (each 10 players bring 3 more).
+  K > 1.0 means organic growth without UA spend — the holy grail.
+- **Natural share triggers**: Design specific moments where sharing feels
+  earned and proud — a rare drop, a surprising combo, an impressive score.
+  Never force sharing; make players want to brag.
+- **Gifting mechanics**: Sending gifts to friends creates social obligation
+  to return. Design gifts that benefit both giver and receiver to maximise
+  the loop.
+- **Async social**: Ghost racing, friend high score challenges, co-op
+  requests — social features that don't require simultaneous play are
+  far more viable for mobile than real-time multiplayer.
+- **"Your friend plays X"**: Social proof is the most effective UA message.
+  Design friend visibility (leaderboards, visit friend's base) specifically
+  because it feeds the acquisition funnel, not just retention.
+
+#### Game Feel and Juice
+Casual F2P games live or die on moment-to-moment satisfaction. Game feel is
+not polish — it is a core design deliverable.
+
+- **Response budget**: Every player-initiated action must have a visual
+  response within 100ms, an audio response, and a particle or animation cue.
+  All three. Missing any one makes the action feel broken.
+- **Proportional feedback**: Big moments get big reactions. A level complete
+  gets more juice than a single match. A rare drop gets more juice than a
+  common one. Juice must be calibrated — constant maximum juice becomes noise.
+- **Idle life**: Creatures, buildings, and units should have idle animations.
+  A static world feels dead. Movement communicates that the game world exists
+  between player actions.
+- **Number satisfaction**: Floating damage numbers, resource collection pop-ups,
+  XP gain indicators — these make progress tangible and reinforce every action.
+- **Haptics (mobile)**: Light tap for UI, medium for matches/merges, strong
+  for level complete or rare drop. Haptics are felt before they are heard —
+  design them as a layer, not an afterthought.
+
 ### Design Document Standard
 
 Every mechanic document in `design/gdd/` must contain these 8 required sections:

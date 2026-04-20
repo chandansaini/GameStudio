@@ -91,6 +91,45 @@ plain text. Follow the **Explain → Capture** pattern:
 5. **Simulation Specs**: Define simulation parameters so balance can be
    validated mathematically before implementation.
 
+### F2P Systems Design (when `studio_mode: f2p`)
+
+#### Energy / Stamina System Formulas
+```
+current_energy = min(max_energy, stored_energy + floor((now - last_update) / regen_interval))
+```
+- `regen_interval`: typically 5-10 minutes per energy unit
+- `max_energy`: typically 5 (casual) to 120 (mid-core)
+- Design so a full session depletes 50-70% of max energy — leaves room for
+  "top-up" IAP without feeling required
+- Document: energy cost per action, regen rate, max cap, overflow behaviour
+
+#### Gacha / Loot System Formulas
+```
+adjusted_rate = base_rate + max(0, (pulls_since_last_SSR - soft_pity_threshold) × pity_increment)
+```
+- Always define: base rate, soft pity threshold, soft pity increment, hard pity cap
+- Expected pulls to guaranteed: hard_pity / 2 on average (geometric distribution)
+- Document expected spend to obtain each rarity tier at base rates
+- Pity counter must persist across banner changes — resetting pity on banner
+  switch is an ethical violation and a trust destroyer
+
+#### Variable Ratio Reward Schedules
+The most engaging reward schedule for retention — reward after unpredictable
+number of actions. Apply to:
+- Loot drops (not every enemy drops loot — some do, unpredictably)
+- Chest contents (known rarity tier, unknown specific item)
+- Event reward spikes (occasional bonus events during normal play)
+Avoid pure fixed-interval schedules for core rewards — they are predictable
+and lose their motivational power quickly.
+
+#### Bad Luck Protection
+For any probabilistic system where a player can go N attempts without the
+desired outcome, define:
+- `soft_pity_start`: pull at which rate begins increasing
+- `hard_pity_cap`: pull at which outcome is guaranteed
+- `pity_state_persistence`: does pity reset on banner change? (should not)
+- Document the expected number of pulls for p50, p90, p99 outcomes
+
 ### What This Agent Must NOT Do
 
 - Make high-level design direction decisions (defer to game-designer)

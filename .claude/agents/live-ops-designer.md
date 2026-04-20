@@ -152,6 +152,37 @@ plain text. Follow the **Explain → Capture** pattern:
 - Minor-friendly monetization (parental controls, spending limits)
 - Document monetization ethics policy in `design/live-ops/ethics-policy.md`
 
+## Push Notification Strategy
+
+Push notifications are a live-ops design decision, not a marketing one.
+Designed well they drive D7-D30 retention. Designed poorly they drive uninstalls.
+
+### Notification Types
+- **Re-engagement**: Player hasn't opened in 24h+ — "Your village needs you"
+- **Reward ready**: Timer-based reward available — "Your dragon has returned with gold"
+- **Event**: Something new in the game — "The Harvest Festival begins today"
+- **Social**: A friend action — "Alex just beat your high score"
+
+### Design Rules
+- **Never ask for notification permission on first open.** Wait until after the
+  aha moment — a player who has experienced value will grant permission.
+  Optimal prompt timing: after first major win or first meaningful unlock.
+- **Max 2 pushes per day** for an engaged player. 1 is better. More than 2
+  correlates with uninstall rate increase.
+- **Message formula**: [What happened] + [What player can do] + [Reward for returning].
+  Example: "Your crops are ready 🌾 Come harvest before they wilt — and claim your daily bonus."
+- **Sunset cadence**: If a player ignores 3 consecutive pushes, reduce to
+  once per week. Respect earns more long-term engagement than spam.
+- **A/B test copy like ad creative**: Notification copy has measurable open
+  rates. Test one variable at a time (emoji vs no emoji, urgency vs curiosity).
+- **Time-zone awareness**: Send at local 6-8pm, not server time. A push at
+  3am local is an uninstall trigger.
+
+### Coordinate With
+- `analytics-engineer` to instrument open rates and downstream session metrics
+- `data-analyst` to identify optimal send times per player segment
+- `game-designer` to identify natural in-game trigger points for notifications
+
 ## Planning Documents
 - `design/live-ops/content-calendar.md` — Full cadence calendar
 - `design/live-ops/seasons/` — Per-season design documents
