@@ -3,13 +3,13 @@
   <p align="center">
     Turn a single Claude Code session into a full game development studio.
     <br />
-    48 agents. 37 workflows. One coordinated AI team.
+    56 agents. 37 workflows. One coordinated AI team. F2P ready.
   </p>
 </p>
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
-  <a href=".claude/agents"><img src="https://img.shields.io/badge/agents-48-blueviolet" alt="48 Agents"></a>
+  <a href=".claude/agents"><img src="https://img.shields.io/badge/agents-56-blueviolet" alt="56 Agents"></a>
   <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-37-green" alt="37 Skills"></a>
   <a href=".claude/hooks"><img src="https://img.shields.io/badge/hooks-8-orange" alt="8 Hooks"></a>
   <a href=".claude/rules"><img src="https://img.shields.io/badge/rules-11-red" alt="11 Rules"></a>
@@ -23,7 +23,9 @@
 
 Building a game solo with AI is powerful — but a single chat session has no structure. No one stops you from hardcoding magic numbers, skipping design docs, or writing spaghetti code. There's no QA pass, no design review, no one asking "does this actually fit the game's vision?"
 
-**Claude Code Game Studios** solves this by giving your AI session the structure of a real studio. Instead of one general-purpose assistant, you get 48 specialized agents organized into a studio hierarchy — directors who guard the vision, department leads who own their domains, and specialists who do the hands-on work. Each agent has defined responsibilities, escalation paths, and quality gates.
+**Claude Code Game Studios** solves this by giving your AI session the structure of a real studio. Instead of one general-purpose assistant, you get 56 specialized agents organized into a studio hierarchy — directors who guard the vision, department leads who own their domains, and specialists who do the hands-on work. Each agent has defined responsibilities, escalation paths, and quality gates.
+
+The studio supports both **indie** and **free-to-play** game development. Set `studio_mode: f2p` in your project's `CLAUDE.md` to activate F2P-specific behaviour across agents — two-currency economy design, retention loop thinking, IAP receipt validation, UA strategy, and live ops.
 
 The result: you still make every decision, but now you have a team that asks the right questions, catches mistakes early, and keeps your project organized from first brainstorm to launch.
 
@@ -50,7 +52,7 @@ The result: you still make every decision, but now you have a team that asks the
 
 | Category | Count | Description |
 |----------|-------|-------------|
-| **Agents** | 48 | Specialized subagents across design, programming, art, audio, narrative, QA, and production |
+| **Agents** | 56 | Specialized subagents across design, programming, art, audio, narrative, QA, production, and F2P (UA, monetization, data) |
 | **Skills** | 37 | Slash commands for common workflows (`/start`, `/sprint-plan`, `/code-review`, `/brainstorm`, etc.) |
 | **Hooks** | 8 | Automated validation on commits, pushes, asset changes, session lifecycle, agent audit, and gap detection |
 | **Rules** | 11 | Path-scoped coding standards enforced when editing gameplay, engine, AI, UI, network code, and more |
@@ -62,7 +64,7 @@ Agents are organized into three tiers, matching how real studios operate:
 
 ```
 Tier 1 — Directors (Opus)
-  creative-director    technical-director    producer
+  creative-director    technical-director    producer    product-manager*
 
 Tier 2 — Department Leads (Sonnet)
   game-designer        lead-programmer       art-director
@@ -78,17 +80,26 @@ Tier 3 — Specialists (Sonnet/Haiku)
   performance-analyst  devops-engineer       analytics-engineer
   security-engineer    qa-tester             accessibility-specialist
   live-ops-designer    community-manager
+
+F2P Layer — activated by studio_mode: f2p
+  ua-manager           ad-creative-artist    ad-monetization-designer
+  data-analyst
+
+* product-manager is F2P-specific (Opus)
 ```
 
 ### Engine Specialists
 
-The template includes agent sets for all three major engines. Use the set that matches your project:
+The studio includes agent sets for all major engines. Use the set that matches your project:
 
-| Engine | Lead Agent | Sub-Specialists |
-|--------|-----------|-----------------|
-| **Godot 4** | `godot-specialist` | GDScript, Shaders, GDExtension |
-| **Unity** | `unity-specialist` | DOTS/ECS, Shaders/VFX, Addressables, UI Toolkit |
-| **Unreal Engine 5** | `unreal-specialist` | GAS, Blueprints, Replication, UMG/CommonUI |
+| Engine | Lead Agent | Sub-Specialists | Best For |
+|--------|-----------|-----------------|---------|
+| **Godot 4** | `godot-specialist` | GDScript, Shaders, GDExtension | Indie, cross-platform |
+| **Unity** | `unity-specialist` | DOTS/ECS, Shaders/VFX, Addressables, UI Toolkit | Mobile F2P, console |
+| **Unreal Engine 5** | `unreal-specialist` | GAS, Blueprints, Replication, UMG/CommonUI | AAA, PC/console |
+| **Cocos Creator** | `cocos-specialist` | TypeScript, mini-games, hot updates | Asian markets, WeChat/ByteDance |
+| **Flutter + Flame** | `flutter-flame-specialist` | Dart, Firebase, AdMob | Casual mobile F2P |
+| **Web / HTML5** | `web-game-specialist` | Phaser 3, PixiJS, Instant Games | Browser, playable ads, FB/WeChat |
 
 ## Slash Commands
 
@@ -155,7 +166,7 @@ versions, and which files are safe to overwrite vs. which need a manual merge.
 CLAUDE.md                           # Master configuration
 .claude/
   settings.json                     # Hooks, permissions, safety rules
-  agents/                           # 48 agent definitions (markdown + YAML frontmatter)
+  agents/                           # 56 agent definitions (markdown + YAML frontmatter)
   skills/                           # 37 slash commands (subdirectory per skill)
   hooks/                            # 8 hook scripts (bash, cross-platform)
   rules/                            # 11 path-scoped coding standards
@@ -258,8 +269,8 @@ Tested on **Windows 10** with Git Bash. All hooks use POSIX-compatible patterns 
 
 ## Community
 
-- **Discussions** — [GitHub Discussions](https://github.com/Donchitos/Claude-Code-Game-Studios/discussions) for questions, ideas, and showcasing what you've built
-- **Issues** — [Bug reports and feature requests](https://github.com/Donchitos/Claude-Code-Game-Studios/issues)
+- **Discussions** — [GitHub Discussions](https://github.com/chandansaini/GameStudio/discussions) for questions, ideas, and showcasing what you've built
+- **Issues** — [Bug reports and feature requests](https://github.com/chandansaini/GameStudio/issues)
 
 ---
 

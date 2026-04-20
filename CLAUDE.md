@@ -58,3 +58,55 @@ See `docs/COLLABORATIVE-DESIGN-PRINCIPLE.md` for full protocol and examples.
 ## Context Management
 
 @.claude/docs/context-management.md
+
+## Future: Game Factory Pipeline
+
+**Not yet implemented. Design is complete — build when ready.**
+
+The goal: input a game idea, receive a signed APK.
+
+### What the factory is
+
+A `/factory` skill that drives the `producer` agent through the full
+development lifecycle autonomously, with 3 human approval gates.
+
+### Architecture
+
+```
+Input: game idea + business requirements (product-manager)
+          ↓
+producer orchestrates all 56 agents through lifecycle phases
+          ↓
+Gate 1: creative-director + product-manager approve concept
+Gate 2: technical-director + product-manager approve architecture
+Gate 3: game-designer + product-manager validate first build
+          ↓
+Output: complete project (code + docs + asset specs + strategy)
+```
+
+### The remaining gaps to close (in priority order)
+
+1. `/factory` skill — drives producer through the pipeline; uses
+   `AskUserQuestion` for the 3 gates; writes state to
+   `production/session-state/active.md` between phases
+2. **Asset library bridge** — Bash scripts to fetch and wire up free
+   asset packs (Kenney.nl, OpenGameArt) as placeholder art; fastest
+   path to a visually complete prototype
+3. **Build automation** — per-engine build scripts runnable via Bash;
+   engine-specific commands for Godot, Unity, Flutter, Cocos, Web
+4. **AI image API integration** — Stability AI / DALL-E prompts written
+   by `art-director`, executed via Bash API calls; replaces placeholder
+   art with generated art for casual game quality
+5. **AI audio API integration** — Suno (music) + ElevenLabs (SFX)
+   called via Bash; `audio-director` writes prompts and briefs
+6. **Code signing** — one-time keystore setup per studio; automates
+   APK signing so output is store-ready
+
+### Role clarity in the factory
+
+- `producer` — orchestrates the pipeline (the factory controller)
+- `product-manager` — provides business requirements as input; validates
+  at each gate that output serves market and KPI goals
+- `game-designer` — defines what the game is; active throughout
+- These three roles do not conflict: producer runs the machine,
+  PM owns the business layer, game-designer owns the player experience
