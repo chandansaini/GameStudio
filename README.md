@@ -1,5 +1,5 @@
 <p align="center">
-  <h1 align="center">Game Studios</h1>
+  <h1 align="center">F2P Game Studios</h1>
   <p align="center">
     Turn a single Claude Code session into a full game development studio.
     <br />
